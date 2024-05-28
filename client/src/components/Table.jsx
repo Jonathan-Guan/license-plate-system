@@ -17,7 +17,8 @@ const Table = ({ licenses }) => {
         </thead>
         <tbody>
           {licenses.map((licenseEntry, index) => (
-            <LicenseEntry key={index} entry={{...licenseEntry, image_path:`/api/images/${licenseEntry.image_path}`}} />
+            <LicenseEntry key={index} entry={{...licenseEntry, image_path:`/api/${licenseEntry.image_path}`
+          }} />
           ))}
         </tbody>
       </table>

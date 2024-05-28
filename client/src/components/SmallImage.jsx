@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import ModalImage from "./ModalImage";
+import "./SmallImage.css";
 
 const SmallImage = ({ imgPath = "" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,10 +13,9 @@ const SmallImage = ({ imgPath = "" }) => {
     setIsModalOpen(false);
   };
 
-  console.log(imgPath);
   return (
     <>
-      {imgPath ? (
+      {imgPath && imgPath.length > "/api/".length ? (
         <>
           <img
             src={imgPath}
@@ -23,6 +23,7 @@ const SmallImage = ({ imgPath = "" }) => {
             width="200"
             alt="img"
             onClick={openModal}
+            className="smallImage"
           />
           <ModalImage
             isOpen={isModalOpen}

@@ -12,7 +12,7 @@ const LicenseSearch = ({ handleLicenses }) => {
     const query = new URLSearchParams(searchDetails).toString();
 
     try {
-      const response = await fetch(`/api/hello?${query}`, {
+      const response = await fetch(`/api/search?${query}`, {
         method: "GET",
       });
 
