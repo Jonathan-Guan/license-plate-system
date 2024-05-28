@@ -39,14 +39,16 @@ app.get("/search", async (req, res) => {
     data.push(startDate);
   }
   if (endDate) {
-    query += "AND entry_time <= ? ";
+    query += "AND entry_time <= DATE_ADD(?, INTERVAL 1 DAY) ";
     data.push(endDate);
   }
 
   if (licensePlate) {
-    query += "AND license = ?";
+    query += "AND license = ? ";
     data.push(licensePlate);
   }
+
+  query += "ORDER BY entry_time DESC";
 
   db.query(query, data, (err, results) => {
     if (err) {
@@ -67,9 +69,11 @@ app.post("/upload", upload.single("image"), (req, res) => {
       .json({ error: "License, entry_time, and image are required" });
   }
 
+  const newPath = `images/${path.basename(req.file.path)}`;
+
   let query =
     "INSERT INTO license_entries (license, entry_time, image_path) VALUES (?, ?, ?)";
-  db.query(query, [license, entry_date, req.file.path], (err, results) => {
+  db.query(query, [license, entry_date, newPath], (err, results) => {
     if (err) {
       console.error("Error executing query:", err);
       return res.status(500).json({ error: "Internal Server Error" });
