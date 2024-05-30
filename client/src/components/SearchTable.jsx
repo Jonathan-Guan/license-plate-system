@@ -1,5 +1,5 @@
 import React from "react";
-import LicenseSearch from "./LicenseSearch";
+import TimeSearch from "./TimeSearch";
 import Table from "./Table";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ const SearchTable = () => {
   
   return (
     <div className="col">
-      <LicenseSearch handleLicenses={handleLicenses} />
+      <TimeSearch handleLicenses={handleLicenses} />
       <Table licenses={licenses}/>
     </div>
   );

@@ -30,7 +30,6 @@ app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 app.get("/search", async (req, res) => {
   const { startDate, endDate, licensePlate } = req.query;
-  //TODO: fix issue where end time doesn't consider full day (add an extra day to end time?)
 
   let query = "SELECT * FROM license_entries WHERE 1=1 ";
   let data = [];
@@ -55,6 +54,19 @@ app.get("/search", async (req, res) => {
       console.error("Error executing query:", err);
       return res.status(500).json({ error: "Internal Server Error" });
     }
+    res.json(results);
+  });
+});
+
+app.get("/colors", async (req, res) => {
+  let query = "SELECT DISTINCT color FROM license_entries WHERE color != ''";
+
+  db.query(query, [], (err, results) => {
+    if (err) {
+      console.error("Error executing query:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+    console.log(results);
     res.json(results);
   });
 });

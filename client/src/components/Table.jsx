@@ -12,7 +12,10 @@ const Table = ({ licenses }) => {
           <tr>
             <th scope="col">Date/Time</th>
             <th scope="col">License Number</th>
+            <th scope="col">State</th>
+            <th scope="col">Color</th>
             <th scope="col">Image</th>
+            <th scope="col">Location</th>
           </tr>
         </thead>
         <tbody>

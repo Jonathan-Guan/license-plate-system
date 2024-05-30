@@ -1,0 +1,73 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto;
+}
+
+.option-container{
+  display:flex;
+  flex-direction: row;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Styles for the dropdown container */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: #ffffff;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-btn::after {
+  content: '▼';
+  float: right;
+  margin-left: 10px;
+}
+
+.dropdown-btn:hover,
+.dropdown-btn:focus {
+  background-color: #ffffff;
+}
+
+.dropdown-item {
+  display: none;
+  background-color: white;
+  border: 1px solid #000000;
+  border-top: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown-container.open .dropdown-item {
+  display: block;
+}
+
+/* Add an arrow to the dropdown button */
+.dropdown-btn::after {
+  content: '▼';
+  float: right;
+  margin-left: 10px;
+}

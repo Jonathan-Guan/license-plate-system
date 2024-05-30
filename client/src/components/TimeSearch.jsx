@@ -1,12 +1,22 @@
 import React from "react";
 import { useState } from "react";
+import DateRangeWindow from "./DateRangeWindow";
+import { format } from "date-fns";
 
-const LicenseSearch = ({ handleLicenses }) => {
+const TimeSearch = ({ handleTimes }) => {
   const [searchDetails, setSearchDetails] = useState({
     startDate: "",
     endDate: "",
     licensePlate: "",
   });
+
+  const handleDates = (selection) => {
+    setSearchDetails((prevData) => ({
+      ...prevData,
+      startDate: format(selection.startDate, "yyyy-MM-dd"),
+      endDate: format(selection.endDate, "yyyy-MM-dd"),
+    }));
+  };
 
   const handleSearch = async () => {
     const query = new URLSearchParams(searchDetails).toString();
@@ -17,7 +27,7 @@ const LicenseSearch = ({ handleLicenses }) => {
       });
 
       const json = await response.json();
-      handleLicenses(json);
+      handleTimes(json);
     } catch {
       console.error("Failed server request");
     }
@@ -32,8 +42,10 @@ const LicenseSearch = ({ handleLicenses }) => {
   };
 
   return (
-    <>
-      <div className="row mb-3">
+    <div className="container">
+      
+      <DateRangeWindow className="dates" handleDates={handleDates} />
+      <div className="option-row">
         <div className="col-md-5">
           <label htmlFor="startDate" className="form-label">
             Start Date
@@ -83,8 +95,8 @@ const LicenseSearch = ({ handleLicenses }) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default LicenseSearch;
+export default TimeSearch;
