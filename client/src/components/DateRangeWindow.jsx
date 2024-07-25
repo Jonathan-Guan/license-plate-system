@@ -3,29 +3,21 @@ import { useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { subDays } from "date-fns";
-import { DateRange, DateRangePicker } from "react-date-range";
+import { DateRange } from "react-date-range";
+import { DateRangePicker } from "rsuite";
+import "rsuite/DateRangePicker/styles/index.css";
 
 const DateRangeWindow = ({ handleDates }) => {
-  const [state, setState] = useState([
-    {
-      startDate: subDays(new Date(), 7),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
-
-  const handleChange = (item) => {
-    setState([item.selection]);
-    handleDates(item.selection);
+  const { afterToday } = DateRangePicker;
+  const handleChange = (date) => {
+    handleDates(date);
   };
 
   return (
-    <DateRange
-      className="justify-content center"
-      ranges={state}
-      maxDate={new Date()}
+    <DateRangePicker
       onChange={handleChange}
-      showDateDisplay={false}
+      shouldDisableDate={afterToday()}
+      size="lg"
     />
   );
 };

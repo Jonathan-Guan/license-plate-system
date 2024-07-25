@@ -16,7 +16,7 @@ const ImageLocation = ({ longitude, latitude }) => {
         ></iframe>
       ) : null}
       <p>{`Latitude: ${latitude} \n Longitude: ${longitude}`}</p>
-      <button onClick={() => setIsOpen((prevState) => !prevState)}>
+      <button className="btn btn-secondary"  onClick={() => setIsOpen((prevState) => !prevState)}>
         {isOpen ? "Hide" : "Expand"}
       </button>
     </>

@@ -1,15 +1,26 @@
-import React, { useState } from "react";
 import SmallImage from "./SmallImage";
 import "./LicenseEntry.css";
 import ImageLocation from "./ImageLocation";
+import { NavLink } from "react-router-dom";
 
 const LicenseEntry = ({ entry }) => {
-  // Convert date to readable format
   const date = new Date(entry.entry_time).toLocaleString("en-US");
+
   return (
-    <tr className="table-row">
+    <tr
+      className={`${
+        entry.violation === "Yes" ? "table-row-violation" : "table-row"
+      }`}
+    >
       <td>{date}</td>
-      <td>{entry.license}</td>
+      <td>
+        <NavLink
+          to="/passes"
+          state={{license: entry.license}}
+        >
+          {entry.license}
+        </NavLink>
+      </td>
       <td>{entry.state}</td>
       <td>{entry.color}</td>
       <td>
@@ -17,6 +28,9 @@ const LicenseEntry = ({ entry }) => {
       </td>
       <td>
         <ImageLocation latitude={entry.latitude} longitude={entry.longitude} />
+      </td>
+      <td>
+        <p>{entry.violation}</p>
       </td>
     </tr>
   );

@@ -1,0 +1,46 @@
+button{
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: lightblue;
+  text-align: center;
+  justify-self: center;
+}
+
+button:hover{
+  background-color: rgb(76, 125, 141);
+}
+
+th{
+  text-align: center;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 3px 25px;
+  gap: 10px;
+  align-content: center;
+  justify-content: center;
+}
+
+.optionContainer{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: end;
+  column-gap: 10rem;
+}
+
+.formControl {
+  width: 8rem;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 2.5rem;
+}
+
+.formBox {
+  margin: 20px;
+  display: flex;
+  width: 50rem;
+}

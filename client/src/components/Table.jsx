@@ -1,9 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import LicenseEntry from "./LicenseEntry";
 import { useEffect } from "react";
+import ReactPaginate from 'react-paginate';
 
 const Table = ({ licenses }) => {
-
   
   return (
     <div className="container mt-5">
@@ -16,14 +16,16 @@ const Table = ({ licenses }) => {
             <th scope="col">Color</th>
             <th scope="col">Image</th>
             <th scope="col">Location</th>
+            <th scope="col">Violation</th>
           </tr>
         </thead>
         <tbody>
-          {licenses.map((licenseEntry, index) => (
+          {(licenses) ? licenses.map((licenseEntry, index) => (
             <LicenseEntry key={index} entry={{...licenseEntry, image_path:`/api/${licenseEntry.image_path}`
           }} />
-          ))}
+          )): null}
         </tbody>
+        
       </table>
     </div>
   );

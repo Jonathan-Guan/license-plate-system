@@ -1,4 +1,12 @@
-.table-row{
+.table-row {
     text-align: center;
     vertical-align: middle;
 }
+
+.table-row-violation td{
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgb(255, 150, 150) !important;
+
+}
+

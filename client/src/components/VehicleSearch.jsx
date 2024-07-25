@@ -1,23 +1,59 @@
 import React, { useEffect, useState } from "react";
-import dropdownMenu from "dropdown-menu-js";
-import "./VehicleSearch.css";
+import styles from "./VehicleSearch.module.css";
 
-const VehicleSearch = (handleVehicle) => {
-  const [state, setState] = useState({
-    state: "",
-    color: "",
-    licensePlate: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  
+const VehicleSearch = ({ handleChange }) => {
+  const states = [
+    "Alabama",
+    "Alaska",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "Florida",
+    "Georgia",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Pennsylvania",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+  ];
 
   const [colorList, setColorList] = useState([]);
   useEffect(() => {
@@ -26,58 +62,71 @@ const VehicleSearch = (handleVehicle) => {
         const response = await fetch(`/api/colors`, {
           method: "GET",
         });
-  
+
         const json = await response.json();
-        setColorList(json);
+        console.log(json.map((item) => item.color));
+        setColorList(json.map((item) => item.color));
       } catch {
         console.error("Failed server request");
       }
     };
-    getColors();
+    if (colorList.length == 0) {
+      getColors();
+    }
   }, []);
 
-  useEffect(() => {
-    dropdownMenu(
-      ".dropdown-container",
-      ".dropdown-item",
-      ".dropdown-btn",
-      "block"
-    );
-  },[colorList])
-
   return (
+    
     <div className="search-container">
-      <label htmlFor="state" className="form-label">
-        State
-      </label>
-      <input
-        type="text"
-        id="state"
-        className="form-control"
-        name="state"
-        value={state.state}
-        onChange={handleChange}
-      />
-      <label htmlFor="color" className="form-label">
-        Color
-      </label>
-      <div className="dropdown-container">
-        <button className="dropdown-btn">Pick a color...</button>
-        {colorList.map((colorEntry, index) => (
-          <div key={index} className="dropdown-item">{colorEntry.color}</div>
-        ))}
+      <div className="option-container">
+        <label htmlFor="licensePlate" className="form-label">
+          License Plate
+        </label>
+        <input
+          type="text"
+          id="licensePlate"
+          className="form-control"
+          name="licensePlate"
+          onChange={handleChange}
+        />
       </div>
-      <label htmlFor="licensePlate" className="form-label">
-        License Plate
-      </label>
-      <input
-        type="text"
-        id="licensePlate"
-        className="form-control"
-        name="licensePlate"
-        value={state.licensePlate}
-        onChange={handleChange}
-      />
+      <div className="option-container">
+        <label htmlFor="state" className="form-label">
+          State
+        </label>
+        <select name="state" onChange={handleChange} className="form-dropdown">
+          <option value="">All</option>
+          {states.map((US_state, index) => (
+            <option key={index} value={US_state}>
+              {US_state}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="option-container">
+        <label htmlFor="color" className="form-label">
+          Color
+        </label>
+        <select name="color" onChange={handleChange} className="form-dropdown">
+          <option value="">All</option>
+          {colorList.map((colorEntry, index) => (
+            <option key={index} value={colorEntry}>
+              {colorEntry}
+            </option>
+          ))}
+        </select>
+      </div>
+      
+      <div className="option-container">
+        <label htmlFor="violation" className="form-label">
+          Violation
+        </label>
+        <select name="violation" onChange={handleChange} className="form-dropdown">
+          <option value="">All</option>
+          <option value="Yes">Violations</option>
+          <option value="No">Non-Violations</option>
+        </select>
+      </div>
     </div>
   );
 };
